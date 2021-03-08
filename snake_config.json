@@ -1,0 +1,225 @@
+{    
+    "Boulder": 
+        {
+            "sit_rep_name" : "Boulder",
+            "county_name" : "Boulder",
+            "city_name" : "Boulder",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/boulder.db",
+            "cities" : "Boulder,Broomfield,Erie,Firestone,Gunbarrel,Lafayette,Longmont,Louisville,Superior,Westminster",
+            "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/co_counties",
+            "county_shapes_name":"NAME",
+            "city_shapes" : "/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
+            "city_shapes_name" : "NAME10",
+
+            "min_lat" : "39.95",
+            "max_lat" : "40.086",
+            "min_lon" : "-105.305",
+            "max_lon" : "-105.205",
+
+            "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=3072444842777714",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/boulder_pop_tiles/orig/",
+            "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/boulder.db"
+
+        },
+
+    "Columbia": 
+        {
+            "sit_rep_name" : "Columbia",
+            "county_name" : "Columbia",
+            "city_name" : "Columbia",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/columbia.db",
+            "cities" : "_",
+            "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/columbia_shape",
+            "county_shapes_name":"_",
+            "city_shapes" : "/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
+            "city_shapes_name" : "_",
+
+            "min_lat" : "4.25",
+            "max_lat" : "5.1",
+            "min_lon" : "-74.8",
+            "max_lon" : "-73.6",
+
+            "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=3072444842777714",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/columbia_pop_tiles/orig/",
+            "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/columbia.db"
+
+        },
+
+    "Chile": 
+        {
+            "sit_rep_name" : "Chile",
+            "county_name" : "Chile",
+            "city_name" : "Chile",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/chile.db",
+            "cities" : "_",
+            "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/chile_shape",
+            "county_shapes_name":"_",
+            "city_shapes" : "/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
+            "city_shapes_name" : "_",
+
+            "url":"_",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/chile_pop_tiles/orig/",
+            "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/chile.db"
+
+        },
+
+    "Denver":{
+            "sit_rep_name" : "Denver",
+            "county_name" : "Denver",
+            "city_name" : "Denver",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/denver.db",
+            "cities" : "Denver",
+            "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/co_counties",
+            "county_shapes_name":"NAME",
+            "city_shapes" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
+            "city_shapes_name" : "NAME10",
+
+            "min_lat" : "NONE",
+            "max_lat" : "NONE",
+            "min_lon" : "NONE",
+            "max_lon" : "NONE",
+
+            "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=646767436113235",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/denver_pop_tiles/orig/",
+            "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/denver.db"
+
+        },
+
+    "Arapahoe":{
+            "sit_rep_name" : "Arapahoe",
+            "county_name" : "Arapahoe",
+            "city_name" : "Arapahoe",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/colorado.db",
+            "cities" : "Aurora,Bennett,Bow Mar,Centennial,Cherry Hills Village,Columbine Valley,Deer Trail,Englewood,Foxfield,Glendale,Greenwood Village,Littleton,Sheridan",
+            "county_shapes" :"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/co_counties",
+            "county_shapes_name" :"NAME",
+            "city_shapes" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
+            "city_shapes_name" : "NAME10", 
+
+            "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=2818080764946565",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/colorado_pop_tiles/orig/",
+            "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/colorado.db"
+
+
+        },
+
+    "ArapahoeDM":{
+            "sit_rep_name" : "ArapahoeDM",
+            "county_name" : "Arapahoe",
+            "city_name" : "Arapahoe",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/denver.db",
+            "cities" : "Aurora,Bennett,Bow Mar,Centennial,Cherry Hills Village,Columbine Valley,Deer Trail,Englewood,Foxfield,Glendale,Greenwood Village,Littleton,Sheridan",
+            "county_shapes" :"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/co_counties",
+            "county_shapes_name" :"NAME",
+            "city_shapes" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
+            "city_shapes_name" : "NAME10",
+
+            "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=646767436113235",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/denver_pop_tiles/orig/",
+            "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/denver.db"
+        },
+
+    "SaltLake":{
+            "sit_rep_name" : "SaltLake",
+            "county_name" : "Salt Lake",
+            "city_name" : "Salt Lake",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/utah.db",
+            "cities" : "Bluffdale,Cottonwood Heights,Draper,Herriman,Holladay,Midvale,Millcreek,Murray,Riverton,Salt Lake City,Sandy,South Jordan,South Salt Lake,Taylorsville,West Jordan,West Valley City",
+            "county_shapes" :"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/ut_counties",
+            "county_shapes_name":"NAME",
+            "city_shapes" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Utah_Municipal_Boundaries/",
+            "city_shapes_name" : "NAME",
+
+            "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=683773062374285",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/utah_pop_tiles/orig/",
+            "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/utah.db" 
+        },
+
+    "Mozambique": {
+        "sit_rep_name" : "Mozambique",
+        "county_name" : "Mozambique",
+        "city_name" : "Mozambique",
+        "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/mozambique.db",
+        "cities" : "Boulder,Broomfield,Erie,Firestone,Gunbarrel,Lafayette,Longmont,Louisville,Superior,Westminster",
+        "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Mozambique_shape/",
+        "county_shapes_name":"NAME",
+        "city_shapes" : "/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
+        "city_shapes_name" : "NAME",
+
+        "min_lat" : "-20.2",
+        "max_lat" : "-19.40",
+        "min_lon" : "32.28",
+        "max_lon" : "34.71",
+
+        "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=3072444842777714",
+        "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/mozambique_pop_tiles/orig/"
+    },
+
+    "Lebanon": 
+        {
+            "sit_rep_name" : "Lebanon",
+            "county_name" : "Lebanon",
+            "city_name" : "Lebanon",
+            "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/lebanon.db",
+            "cities" : "_",
+            "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/lebanon_shape",
+            "county_shapes_name":"admin2Name",
+            "city_shapes" : "_",
+            "city_shapes_name" : "_",
+
+            "min_lat" : "33.84",
+            "max_lat" : "33.95",
+            "min_lon" : "35.40",
+            "max_lon" : "35.60",
+
+            "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=3072444842777714",
+            "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/lebanon_pop_tiles/orig/"
+
+
+        },
+
+    "south_dakota": 
+    {
+        "sit_rep_name" : "south_dakota",
+        "county_name" : "south_dakota",
+        "city_name" : "south_dakota",
+        "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/south_dakota.db",
+        "cities" : "Sioux Falls, Rapid City, Aberdeen, Brookings, Watertown, Mitchell, Yankton, Pierre, Huron, Spearfish, Vermillion, Box Elder, Brandon, Madison, Sturgis, Harrisburg, Tea, Belle Fourche",
+        "county_shapes":"/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/tl_2017_46_cousub/",
+        "county_shapes_name":"NAME",
+        "city_shapes" : "/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/South_Dakota_City_Boundaries-shp/",
+        "city_shapes_name" : "NAME",
+
+        "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=2958188820963613",
+        "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/south_dakota_pop_tiles/orig/",
+        "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/south_dakota.db"
+
+    },
+
+    "California": 
+    {
+        "sit_rep_name" : "California",
+        "county_name" : "California",
+        "city_name" : "California",
+        "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/california.db",
+        "cities" : "Crescent City, Yreka, Alturas, Eureka, Weaverville, Redding, Susanville, Red Bluff, Quincy, Willows, Oroville, Downieville, Ukiah, Colusa, Nevada City, Lakeport, Colusa, Marysville, Auburn, Woodland, Santa Rosa",
+        "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/CA_Counties",
+        "county_shapes_name":"NAME",
+        "city_shapes" : "/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/tl_2016_06_place/",
+        "city_shapes_name" : "NAME",
+
+        "min_lat" : "38.17",
+        "max_lat" : "41.95",
+        "min_lon" : "-124.03",
+        "max_lon" : "-119.33",
+
+        "url":"https://www.facebook.com/geoinsights-portal/downloads/?id=3072444842777714",
+        "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/california_pop_tiles/orig/",
+        "db":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/california.db"
+
+    }
+
+}
+
+
+
