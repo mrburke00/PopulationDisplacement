@@ -38,7 +38,7 @@ options.add_argument('window-size=1200x600')
 options.add_argument('window-size=1200x600')
 
 #driver = webdriver.Chrome(chrome_options=options)
-driver = webdriver.Chrome('/Users/DBurke/Documents/Layerlab/automate_download/chromedriver') 
+driver = webdriver.Chrome('/Users/DBurke/Documents/Layerlab/generalized_pipeline/automate_download/chromedriver') 
 #driver = webdriver.Chrome(executable_path=os.path.abspath("Users/DBurke/Documents/Layerlab/automate_download/chromedriver"))
 url2="https://www.stackoverflow.com"
 url1="https://www.google.com"

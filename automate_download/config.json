@@ -2,9 +2,9 @@
 "downloads":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/automate_download/",
 "maps": [ 
     {
-        "url2":"https://www.facebook.com/geoinsights-portal/downloads/?id=1219636425096832",
+        "url2":"https://www.facebook.com/geoinsights-portal/downloads/?id=339370814095858",
         "url":"https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2Fgeoinsights-portal%2F",
-        "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/chile_pop_tiles/orig/"
+        "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/florida_pop_tiles/orig/"
     }
 ]
 }
