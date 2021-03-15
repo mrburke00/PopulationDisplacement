@@ -53,9 +53,15 @@
             "db" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dbs/chile.db",
             "cities" : "_",
             "county_shapes":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/chile_shape",
-            "county_shapes_name":"_",
+            "county_shapes_name":"ADM0_ES",
             "city_shapes" : "/Users/Dburke/Documents/Layerlab/generalized_pipeline/facebook/shapefiles/Colorado_City_Boundaries/",
             "city_shapes_name" : "_",
+
+            "min_lat" : "NONE",
+            "max_lat" : "NONE",
+            "min_lon" : "NONE",
+            "max_lon" : "NONE",
+
 
             "url":"_",
             "repo":"/Users/DBurke/Documents/Layerlab/generalized_pipeline/pop_tiles/chile_pop_tiles/orig/",

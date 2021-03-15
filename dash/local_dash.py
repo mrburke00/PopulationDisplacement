@@ -36,17 +36,20 @@ class MaxSizeCache:
 		self.new_jfile = {}
 		self.df_dict = {}
 
-		with open('location_data/animation.pickle', 'rb') as handle:  
+	def build(self, target):
+		with open('saved_data/'+target+'/animation.pickle', 'rb') as handle:  
 			self.df_geo = pickle.load(handle)
 
-		with open('location_data/dates_times.pickle', 'rb') as handle:
+		with open('saved_data/'+target+'/dates_times.pickle', 'rb') as handle:
 			self.dates_times = pickle.load(handle)
 
-		with open('location_data/json_geo.json') as data_file:
+		with open('saved_data/'+target+'/json_geo.json') as data_file:
 			self.new_jfile = json.load(data_file)
 
-		with open('location_data/trend_lines.pickle', 'rb') as handle:
+		with open('saved_data/'+target+'/trend_lines.pickle', 'rb') as handle:
 			self.df_dict = pickle.load(handle)
+
+
 
 
 external_stylesheets = [dbc.themes.BOOTSTRAP,'style.css']
@@ -84,17 +87,19 @@ def geo_convert(j_file, today):
 		pass
 
 
-def prep_session_data():
+def prep_session_data(url_path):
 
-
-	if len(cache.df_geo.index) != 0 and cache.dates_times and cache.new_jfile and cache.df_dict:
-		return
+	target = url_path[1:]
+	cache.build(target)
+	#if len(cache.df_geo.index) != 0 and cache.dates_times and cache.new_jfile and cache.df_dict:
+		#return
 
 
 
 #@timeit
-def get_map(point_indexes, build):
+def get_map(point_indexes, build, url_path):
 	if build:
+		if url_path: prep_session_data(url_path)
 		mapbox_access_token = open("mapbox_token").read()
 		px.set_mapbox_access_token(open("mapbox_token").read())
 
@@ -237,7 +242,6 @@ def update_scatter_plots(
 						 map_data,
 						 map_selection
 						 ):
-	prep_session_data()
 	print('something here changed')
 	df_geo = cache.df_geo
 
@@ -274,13 +278,14 @@ def update_scatter_plots(
 			cross_points = [k for k,v in trace_dict.items() if v == pos]
 			ws_indexes.extend(cross_points)
 
-	return weekend_score_callback(ws_indexes, True), \
-		get_map(map_indexes, True)
+	return weekend_score_callback(ws_indexes, True, None), \
+		get_map(map_indexes, True, None)
 
 
-def weekend_score_callback(point_indexes, build):
+def weekend_score_callback(point_indexes, build, url_path):
 
 	if build:
+		if url_path: prep_session_data(url_path)
 		df_dict = cache.df_dict
 		df_geo = cache.df_geo
 		new_jfile = cache.new_jfile
@@ -341,7 +346,8 @@ def weekend_score_callback(point_indexes, build):
 
 		return fig
 
-def build_pre_graphs():
+def build_pre_graphs(target):
+	cache.build(target)
 	df_dict = cache.df_dict
 	df_geo = cache.df_geo
 	new_jfile = cache.new_jfile
@@ -393,6 +399,8 @@ def build_pre_graphs():
 	                    name='median'))
 	fig.update_layout(template = 'plotly_dark')
 	return fig
+
+
 colors =  {
 	'background' :'black'
 }
@@ -427,7 +435,7 @@ colors =  {
 		],width=5,style={'backgroundColor' : colors['background'],'float': 'left','height':'100vh'}),
 
 	])'''
-def layout(build):
+def layout(build, url_path):
 	layout1 = html.Div(style = {'backgroundColor' : colors['background']},
 			children = [
 			dbc.Row([
@@ -443,13 +451,13 @@ def layout(build):
 			dbc.Col([
 				dbc.Row( [
 					dbc.Col( dcc.Graph(id='map',
-									   figure=get_map([], build),
+									   figure=get_map([], build, url_path),
 									   style={'backgroundColor' : colors['background'],'height':'90vh'})),
 				],no_gutters=True),
 
 			],width=7,style={'backgroundColor' : colors['background'],'float': 'left','height':'100vh','padding':'0'}),
 			dbc.Col([
-				dcc.Graph(id='weekend_score', figure = weekend_score_callback([], build), style={'backgroundColor' : colors['background'],'height':'90vh'}),
+				dcc.Graph(id='weekend_score', figure = weekend_score_callback([], build, url_path), style={'backgroundColor' : colors['background'],'height':'90vh'}),
 
 			],width=5,style={'backgroundColor' : colors['background'],'float': 'left','height':'100vh'}),
 
@@ -475,10 +483,27 @@ layout_index = html.Div(style = {'backgroundColor' : colors['background']},
 		], style={'backgroundColor' : colors['background'],'grid-row': '1','grid-column': '3'})
 	],style={'backgroundColor' : colors['background'],'display': 'grid', 'grid-template-columns': 'auto auto auto'}),
 	dbc.Col([
-		dcc.Link('Boulder', href='/boulder'),
+		dcc.Link('Boulder', href='/Boulder'),
 		dbc.Row( [
-			dbc.Col( dcc.Graph(id='test', figure = build_pre_graphs(),
-							   style={'backgroundColor' : colors['background'],'height':'90vh'})),
+			dbc.Col( dcc.Graph(id='test', figure = build_pre_graphs('Boulder'),
+							   style={'backgroundColor' : colors['background'],'height':'45vh'})),
+		],no_gutters=True)
+	]),
+	dbc.Row([
+		html.Div([
+			html.H1('COvid-19'),
+		],style={'backgroundColor' : colors['background'],'grid-row': '1','grid-column': '2'}),
+		html.Div([
+			html.Img(src='assets/covid19.png', height=50),
+			html.Img(src='assets/cu.png', height=50),
+			html.Img(src='assets/csu.jpg', height=50)
+		], style={'backgroundColor' : colors['background'],'grid-row': '1','grid-column': '3'})
+	],style={'backgroundColor' : colors['background'],'display': 'grid', 'grid-template-columns': 'auto auto auto'}),
+	dbc.Col([
+		dcc.Link('Chile', href='/Chile'),
+		dbc.Row( [
+			dbc.Col( dcc.Graph(id='test', figure = build_pre_graphs('Chile'),
+							   style={'backgroundColor' : colors['background'],'height':'45vh'})),
 		],no_gutters=True)
 	])
 ])
@@ -490,7 +515,7 @@ app.title = 'COvid-19'
 app.validation_layout = html.Div([
     url_bar_and_content_div,
     layout_index,
-    layout(False)
+    layout(False, None)
 ])
 
 @app.callback(Output('page-content', 'children'),
@@ -499,8 +524,8 @@ app.validation_layout = html.Div([
 def display_page(pathname):
 	print('URL changed', pathname)
 
-	if pathname == '/boulder':
-		return layout(True)
+	if pathname == '/Boulder' or pathname == '/Chile':
+		return layout(True, pathname)
 	else:
 	    return layout_index
 

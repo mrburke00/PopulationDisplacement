@@ -195,7 +195,7 @@ for pos in D:
 
 			df['0000'] = df['0000'].replace({'NA': None})
 			missings = df[df['0000'].isnull()].index.tolist()
-			if len(missings) > 25:
+			if len(missings) > 7:
 				df['0000'].drop
 				continue
 			else:
@@ -245,7 +245,7 @@ for pos in D:
 			df['0800'] = two
 			df['0800'] = df['0800'].replace({'NA': None})
 			missings = df[df['0800'].isnull()].index.tolist()
-			if len(missings) > 25:
+			if len(missings) > 7:
 				df['0800'].drop
 				continue
 			else:
@@ -293,7 +293,7 @@ for pos in D:
 			df['1600'] = three
 			df['1600'] = df['1600'].replace({'NA': None})
 			missings = df[df['1600'].isnull()].index.tolist()
-			if len(missings) > 25:
+			if len(missings) > 7:
 				df['1600'].drop
 				continue
 			else:
