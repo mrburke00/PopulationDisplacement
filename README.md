@@ -107,6 +107,7 @@ $ python local_dash.py
   - Each line is attached to a tile. You can use the plotly selection tools to isolate tiles and lines of further interest
 
 ### Previous Builds 
+```
 $ python src/csv_to_sql.py --csv pop_tiles/ --db colorado.db
 rm -f colorado.db;sqlite3 colorado.db < tmp.sql
 $ rm -f colorado.db;sqlite3 colorado.db < tmp.sql
