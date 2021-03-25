@@ -4,6 +4,7 @@ Providing insight into population displacement during natural disasters
 
 ## Table of contents
    * [Setup](#setup)
+      * [New Targets](#Identify-target-of-interest)
       * [Pipeline](#Establish-pipeline-configuration)
    * [Previous Builds](#previous-builds)
    * [Methods](#methods)
