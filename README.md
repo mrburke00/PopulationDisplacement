@@ -57,13 +57,13 @@ $ python scrape.py --config config.json --cred --credential.json
           - Open a new terminal and `cd facebook/shapefiles/`
           - Run
 
-                              $ python 
-                              >>> import geopandas as gpd
-                              >>> gdf = gpd.read_file("{shape_directory}")
-                              >>> gdf
-                  
-              - This should output a table containing a `geometry` column and another column that will contain either cities, districts, villages, counties, states, etc. 
-              - This column name will be your `county_shapes_name`. 
+            $ python 
+            >>> import geopandas as gpd
+            >>> gdf = gpd.read_file("{shape_directory}")
+            >>> gdf
+
+  - This should output a table containing a `geometry` column and another column that will contain either cities, districts, villages, counties, states, etc. 
+  - This column name will be your `county_shapes_name`. 
     -`city_shapes` is always `_` (later functionality)
     -`city_shapes_name` is always `_` (later functionality)
     - 
