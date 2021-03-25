@@ -38,8 +38,7 @@ $ python scrape.py --config config.json --cred --credential.json
 ```
 - Note: Often the this script will place the downloaded files in your `downloads` folder. If so, manually move the files to the `repo` defined in your `config.json`
 
-### 
-- Define new target of interest
+### Defining a new target of interest
 - Edit `snake_config.json`
   - Using the defined format, create a new entry. (It is recommended you copy and paste a previously defined city as the formatting is crucial)
   - The json key, `sit_rep_name`, `county_name`, and `city_name` should all be the same name.  This name should be one word, begin with a capitol letter and 
@@ -63,12 +62,51 @@ $ python scrape.py --config config.json --cred --credential.json
             >>> gdf
 
   - This should output a table containing a `geometry` column and another column that will contain either cities, districts, villages, counties, states, etc. 
-  - This column name will be your `county_shapes_name`. 
-    -`city_shapes` is always `_` (later functionality)
-    -`city_shapes_name` is always `_` (later functionality)
-    - 
+  - This column name will be your `county_shapes_name`
+  - `city_shapes` is always `_` (later functionality)
+  - `city_shapes_name` is always `_` (later functionality)
+  - If you are researching a very large dataset it is highly recommended that you identify a sub-region of interest. If you choose to do such simply draw a coordinate box
+    and input the four respective coordinates into `min_lat`, `max_lat`, `min_lon`, and `max_lon` respectively. 
+  - If you would like to research the entire dataset then input `NONE` into all four categories. 
+  - Finally input the population tiles into `Repo`. 
 
+### Establish pipeline configuration
+ - Edit `init.json`
+ - This config file will establish the targets of interest you would like to investigate concurenntly. 
+ - You may add as many as targets as you wish (Note: Only four concurrent cities have been tested at this point). Be mindful of the collective data useage your targets will demand. 
+ - Enter the `sit_rep_name` as `city`
+ - Enter the start date of interest as `start_date`
+ - Enter the end date of interest as `end_date`
+ - It is very important you follow the defined format of `YYYY,M,D`. Do no prepend single digit numbers with a zero.
+ - Define your system path to the pipeline in `path`
 
+Setup is now complete! 
+
+## Pipeline Step 1: Build Data
+- Ensure the conda environment is activated
+- Run
+```
+$ python __init__.py
+```
+- If successful you will have a directory for each of you defined targets in `/dash/saved_data/`
+  - In each of these new directories you will have five files
+        - `animation.pickle`, `dates_times.pickle`, `json_geo.json`, `pre_graph_data.csv`, and `trend_lines.pickle`
+## Pipeline Step 2: Run Dashboard
+- From `/dash` Run
+```
+$ python local_dash.py
+```
+- Go to  `http://127.0.0.1:8050/`
+- The initial page is the index page
+- These graphs display each of the requested targets of interest, with the corresponding number of tiles that deviated away from the median of that day.
+- Using this information the researcher can decide where anomalities warrant further research, in which case you can click the hyperlink above each graph
+  - You may also change the url directly with your `sit_rep_name` (http://127.0.0.1:8050/Lebanon)
+- This will redirect you to an indepth profile on your target of interest
+  - The map contains an animation frame for each day 
+  - The line plots are the trend component of the season decompositon
+  - Each line is attached to a tile. You can use the plotly selection tools to isolate tiles and lines of further interest
+
+### Previous Builds 
 $ python src/csv_to_sql.py --csv pop_tiles/ --db colorado.db
 rm -f colorado.db;sqlite3 colorado.db < tmp.sql
 $ rm -f colorado.db;sqlite3 colorado.db < tmp.sql
