@@ -26,22 +26,49 @@ $ conda activate COvid19
 - Find target of interest on Facebook GeoInsights Portal
 - Click Facebook Population (Tile Level) and then `Download`. Save the url of this `Download` page. 
 - Edit `automate_download/config.json`
-    - Ensure correctness of `downloads` and 
+    - Ensure correctness of `downloads` 
     - Enter url of facebook webpage for Tile Level downloads into `tile_link`
     - Edit `repo` to the correct path
     ```
-    /pop_tiles/{target_name}_pop_tiles/orig/"
+    /pop_tiles/{target_name}_pop_tiles/orig/
     ```    
 - Run 
 ```
 $ python scrape.py --config config.json --cred --credential.json
-``` 
-- From `pop_tiles` run 
 ```
-$ bash fix_files.sh
-```
-- Create the database
-```
+- Note: Often the this script will place the downloaded files in your `downloads` folder. If so, manually move the files to the `repo` defined in your `config.json`
+
+### 
+- Define new target of interest
+- Edit `snake_config.json`
+    - Using the defined format, create a new entry. (It is recommended you copy and paste a previously defined city as the formatting is crucial)
+    - The json key, `sit_rep_name`, `county_name`, and `city_name` should all be the same name.  This name should be one word, begin with a capitol letter and 
+        define the target of interest
+    - `db` should establish the path to your database (not yet built), this database should be the same as your `sit_rep_name` except all lower case
+    - `cities` is always `_` (later functionality)
+    - Download the `county_shapes`
+          - The pipeline requires shape file data of the region of interest.
+          - The easiest way to obtain this data is to google `{region} + shape file`. (Example: 'Lebanon shape file') 
+              - Yields : https://data.humdata.org/dataset/lebanon-administrative-boundaries-levels-0-3
+              - In this example we can see the shape file data for administrative boundaries level 0, 1 ,2 and 3 for Lebanon
+              - Upon downloading this we see that it includes many files, we want level 0 in the following file formats
+                  - `.shx, .shp.xml, .shp, .sbx, .sbn, .prj, .dbf, .cpg`
+              - Select these files for level 0 and move them into a new directory in `facebook/shapefiles/...` 
+              - Open a new terminal and `cd facebook/shapefiles/`
+              - Run
+                  ```
+                  $ python 
+                  >>> import geopandas as gpd
+                  >>> gdf = gpd.read_file("{shape_directory}")
+                  >>> gdf
+                  ```
+              - This should output a table containing a `geometry` column and another column that will contain either cities, districts, villages, counties, states, etc. 
+              - This column name will be your `county_shapes_name`. 
+    -`city_shapes` is always `_` (later functionality)
+    -`city_shapes_name` is always `_` (later functionality)
+    - 
+
+
 $ python src/csv_to_sql.py --csv pop_tiles/ --db colorado.db
 rm -f colorado.db;sqlite3 colorado.db < tmp.sql
 $ rm -f colorado.db;sqlite3 colorado.db < tmp.sql
