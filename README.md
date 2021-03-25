@@ -49,7 +49,7 @@ $ python scrape.py --config config.json --cred --credential.json
     - Download the `county_shapes`
           - The pipeline requires shape file data of the region of interest.
           - The easiest way to obtain this data is to google `{region} + shape file`. (Example: 'Lebanon shape file') 
-            - Yields : https://data.humdata.org/dataset/lebanon-administrative-boundaries-levels-0-3
+              - Yields : https://data.humdata.org/dataset/lebanon-administrative-boundaries-levels-0-3
             - In this example we can see the shape file data for administrative boundaries level 0, 1 ,2 and 3 for Lebanon
             - Upon downloading this we see that it includes many files, we want level 0 in the following file formats
               - `.shx, .shp.xml, .shp, .sbx, .sbn, .prj, .dbf, .cpg`
