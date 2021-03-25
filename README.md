@@ -51,10 +51,11 @@ $ python scrape.py --config config.json --cred --credential.json
         - Yields : https://data.humdata.org/dataset/lebanon-administrative-boundaries-levels-0-3
         - In this example we can see the shape file data for administrative boundaries level 0, 1 ,2 and 3 for Lebanon
         - Upon downloading this we see that it includes many files, we want level 0 in the following file formats
-          - `.shx, .shp.xml, .shp, .sbx, .sbn, .prj, .dbf, .cpg`
-          - Select these files for level 0 and move them into a new directory in `facebook/shapefiles/...` 
-          - Open a new terminal and `cd facebook/shapefiles/`
-          - Run
+        
+        - `.shx, .shp.xml, .shp, .sbx, .sbn, .prj, .dbf, .cpg`
+        - Select these files for level 0 and move them into a new directory in `facebook/shapefiles/...` 
+        - Open a new terminal and `cd facebook/shapefiles/`
+        - Run
 
             $ python 
             >>> import geopandas as gpd
