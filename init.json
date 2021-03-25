@@ -1,6 +1,29 @@
+
 {
-"cities":"Boulder",
-"start_date" : "2020,11,15",
-"end_date" : "2020,12,15",
-"path" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/"
+		"cities":
+			[
+					{ 
+						"city":"Lebanon",
+						"start_date" : "2020,8,1",
+						"end_date" : "2020,8,14",
+						"path" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/"
+					},
+
+					{
+						"city":"Boulder",
+						"start_date" : "2020,11,1",
+						"end_date" : "2020,11,30",
+						"path" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/"
+					},
+
+					{
+						"city":"Chile",
+						"start_date" : "2021,1,15",
+						"end_date" : "2021,1,28",
+						"path" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/"
+					}
+					
+			],
+		"path": "/Users/DBurke/Documents/Layerlab/generalized_pipeline/"
+
 }

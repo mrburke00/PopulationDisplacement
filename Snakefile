@@ -34,11 +34,10 @@ def daterange(date1, date2):
 
 base_path = path
 sit_rep_path = base_path+'sitreps/'+sit_rep_name+'/'
-location_data_path = base_path + "dash/location_data/"
+location_data_path = base_path + "dash/saved_data/" + sit_rep_name + "/"
 src = base_path+'src'
 hot_spot_shapes = sit_rep_path + sit_rep_name + '_hot_spot_shapes/'
 density_trends = sit_rep_path + sit_rep_name + '_density_trends/'
-
 
 list_of_tiles = glob.glob(repo + '*csv')
 latest_tile = max(list_of_tiles, key=os.path.getctime)
@@ -49,7 +48,8 @@ rule all:
 		location_data_path+'animation.pickle',
 		location_data_path+'json_geo.json',
 		location_data_path+'trend_lines.pickle',
-		location_data_path+'dates_times.pickle'
+		location_data_path+'dates_times.pickle',
+		location_data_path+'pre_graph_data.csv'
 		
 rule db:
 	input:
@@ -93,7 +93,8 @@ rule hot_spot_shapes:
     		--min_lat {min_lat}\
     		--max_lat {max_lat}\
     		--min_lon {min_lon}\
-    		--max_lon {max_lon}'
+    		--max_lon {max_lon} \
+    		--county_shapes_name {county_shapes_name}'
 
 rule density_trends:
 	input:
@@ -116,5 +117,30 @@ rule density_trends:
     		--max_lat {max_lat}\
     		--min_lon {min_lon}\
     		--max_lon {max_lon}'
+
+rule pre_process:
+	input:
+		db,
+		location_data_path+'dates_times.pickle',
+		location_data_path+'animation.pickle',
+		location_data_path+'json_geo.json',
+		location_data_path+'trend_lines.pickle'
+	output:
+		location_data_path+'pre_graph_data.csv'
+
+	shell:
+		'python {src}/make_pre_graphs.py \
+		    --sit_rep_name {sit_rep_name}\
+    		--base_path {base_path}'
+
+
+
+
+
+
+
+
+
+
 
 

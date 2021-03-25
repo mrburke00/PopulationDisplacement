@@ -145,10 +145,10 @@ model.fit(x,y)
 
 D = get_db_fields(options.db, ['n_baseline', 'n_crisis'])
 
-with open(options.base_path+'/dash/location_data/dates_times.pickle', 'rb') as handle:
+with open(options.base_path+'/dash/saved_data/'+ options.sit_rep_name+ '/dates_times.pickle', 'rb') as handle:
 	dates_times = pickle.load(handle)
 
-with open(options.base_path+'/dash/location_data/animation.pickle', 'rb') as handle:
+with open(options.base_path+'/dash/saved_data/'+ options.sit_rep_name+ '/animation.pickle', 'rb') as handle:
     b = pickle.load(handle)
 
 df_dict_animation = b
@@ -344,7 +344,7 @@ for pos in D:
 		df['coordinates'] = coordinates['polygons']
 		df_dict[position] = df
 
-with open(options.base_path+'/dash/location_data/trend_lines.pickle', 'wb') as handle:
+with open(options.base_path+'/dash/saved_data/'+ options.sit_rep_name+ '/trend_lines.pickle', 'wb') as handle:
 	pickle.dump(df_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 

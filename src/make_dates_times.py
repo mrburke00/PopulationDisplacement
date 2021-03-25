@@ -41,7 +41,7 @@ for pos in D:
 dates_times = sorted(dates_times.keys())
 
 if options.beg_doI and options.end_doI:
-	''''''
+
 	start_t = options.beg_doI.replace(' ', '-')
 	end_t = options.end_doI.replace(' ', '-')
 	new_dates_times = {}
@@ -54,5 +54,5 @@ if options.beg_doI and options.end_doI:
 	new_dates_times = sorted(new_dates_times.keys())
 	dates_times = new_dates_times
 
-with open(options.base_path+'/dash/location_data/dates_times.pickle', 'wb') as handle:
+with open(options.base_path+'/dash/saved_data/'+ options.sit_rep_name + '/dates_times.pickle', 'wb') as handle:
 	pickle.dump(dates_times, handle, protocol=pickle.HIGHEST_PROTOCOL)

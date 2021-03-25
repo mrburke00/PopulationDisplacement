@@ -25,6 +25,9 @@ from datetime import timedelta
 import pickle
 import re
 from statsmodels.tsa.seasonal import seasonal_decompose
+import os
+import csv
+import random
 #from app import app
 
 
@@ -103,8 +106,12 @@ def get_map(point_indexes, build, url_path):
 		mapbox_access_token = open("mapbox_token").read()
 		px.set_mapbox_access_token(open("mapbox_token").read())
 
-		df = pd.DataFrame()
+		map_coords = random.choice(list(cache.df_dict.keys()))
+		map_coords = map_coords.split(',')
+		map_lat = round(float(map_coords[0]),3)
+		map_lon = round(float(map_coords[1]),3)
 
+		df = pd.DataFrame()
 		df_geo = cache.df_geo
 		new_jfile = cache.new_jfile
 		dates_times = cache.dates_times
@@ -203,7 +210,7 @@ def get_map(point_indexes, build, url_path):
 		}],
 			mapbox={
 				'accesstoken':mapbox_access_token,
-				'center':{"lat": 40.0086, "lon": -105.28},
+				'center':{"lat": map_lat, "lon": map_lon},
 				'zoom':6,
 				'style':'light',
 			}
@@ -214,7 +221,7 @@ def get_map(point_indexes, build, url_path):
 		
 
 		fig.update_layout(title_x =0.5,mapbox_style = 'dark', template = 'plotly_dark',
-						 mapbox = dict(center= dict(lat=40.0086, lon=-105.275),            
+						 mapbox = dict(center= dict(lat=map_lat, lon=map_lon),            
 									   accesstoken= mapbox_access_token,
 									   zoom=11
 									   ))
@@ -223,7 +230,7 @@ def get_map(point_indexes, build, url_path):
 									   layers = [ dict(
 										   type = "symbol",
 										   color = "#2600ff",
-										   coordinates = [40.0086, -105.28]
+										   coordinates = [map_lat, map_lon]
 									   )]))
 		print('print map done')
 		return fig
@@ -312,15 +319,17 @@ def weekend_score_callback(point_indexes, build, url_path):
 				df['1600'] = df['1600'].astype(float)
 				dates = df['dates']
 
-
 				c_0 = df['0000'].to_list()
 				c_8 = df['0800'].to_list()
 				c_16 = df['1600'].to_list()
-
+				if(len(dates)< 14):
+					period = len(dates)//2
+				else:
+					period = 7
 				j = 0
 				for c in [c_0, c_8, c_16]:
 					result_mul = seasonal_decompose(c,
-										 period=7,
+										 period=period,
 										 model = 'multiplicative',
 										 extrapolate_trend='freq')
 				
@@ -347,56 +356,26 @@ def weekend_score_callback(point_indexes, build, url_path):
 		return fig
 
 def build_pre_graphs(target):
-	cache.build(target)
-	df_dict = cache.df_dict
-	df_geo = cache.df_geo
-	new_jfile = cache.new_jfile
-	dates_times = cache.dates_times
-	trends = {}
-	dates = []
-	for i in range(0,len(dates_times),3):
-	    date = dates_times[i][0]
-	    dates.append(date)
-	    vals = []
-	    for key in df_dict.keys():
-	        df = df_dict[key]
-	        vals.extend((df.loc[df['dates'] == date].values[0][1:4].astype(float)))
-	    #print(vals)
-	    q_25 = np.percentile(vals, 25)
-	    q_50 = np.percentile(vals, 50)
-	    q_75 = np.percentile(vals, 75)
-	    trends[date] = (q_25, q_50, q_75)
-	trends_lower = []
-	trends_upper = []
-	trends_median = []
-	for i in range(0,len(dates_times),3):
-	    date = dates_times[i][0]
-	    lower_count = 0
-	    upper_count = 0
-	    median_count = 0
-	    for key in df_dict.keys():
-	        df = df_dict[key]
-	        vals = ((df.loc[df['dates'] == date].values[0][1:4].astype(float)))
-	        if (np.percentile(vals, 25)) <= trends[date][0]:
-	            lower_count = lower_count + 1
-	        elif ((np.percentile(vals, 75)) >= trends[date][2]):
-	            upper_count = upper_count + 1
-	        else:
-	            median_count = median_count + 1
-	    trends_lower.append(lower_count)
-	    trends_upper.append(upper_count)
-	    trends_median.append(median_count)
+	path = 'saved_data/'+target+'/pre_graph_data.csv'
+
+	with open(path, 'r') as file:
+	    reader = csv.reader(file)
+	    rows = [r for r in reader]
+	    trends_lower = rows[0]
+	    trends_upper = rows[1]
+	    trends_median = rows[2]
+	    dates = rows[3]
 
 	fig = go.Figure()
 	fig.add_trace(go.Scatter(y=trends_lower, x=dates,
-	                    mode='lines',
-	                    name='decrease'))
+						mode='lines',
+						name='decrease'))
 	fig.add_trace(go.Scatter(y=trends_upper, x=dates,
-	                    mode='lines',
-	                    name='increase'))
+						mode='lines',
+						name='increase'))
 	fig.add_trace(go.Scatter(y=trends_median, x=dates,
-	                    mode='lines',
-	                    name='median'))
+						mode='lines',
+						name='median'))
 	fig.update_layout(template = 'plotly_dark')
 	return fig
 
@@ -404,7 +383,6 @@ def build_pre_graphs(target):
 colors =  {
 	'background' :'black'
 }
-
 
 
 '''def layout():
@@ -436,6 +414,7 @@ colors =  {
 
 	])'''
 def layout(build, url_path):
+	print("here")
 	layout1 = html.Div(style = {'backgroundColor' : colors['background']},
 			children = [
 			dbc.Row([
@@ -464,13 +443,46 @@ def layout(build, url_path):
 		])
 	return layout1
 
+def generate_html():
+	path = "/Users/DBurke/Documents/Layerlab/generalized_pipeline/dash/saved_data/"
+	children = []
+	cities_requested = [] 
+	children.append(dbc.Row([
+						html.Div([
+							html.H1('COvid-19'),
+						],style={'backgroundColor' : colors['background'],'grid-row': '1','grid-column': '2'}),
+						html.Div([
+							html.Img(src='assets/covid19.png', height=50),
+							html.Img(src='assets/cu.png', height=50),
+							html.Img(src='assets/csu.jpg', height=50)
+						], style={'backgroundColor' : colors['background'],'grid-row': '1','grid-column': '3'})
+					],style={'backgroundColor' : colors['background'],'display': 'grid', 'grid-template-columns': 'auto auto auto'}),)
+	height = 100/(len((os.listdir(path)))-1)
+	height = str(height)+"vh"
+	for file in os.listdir(path):
+
+		if file != '.DS_Store':
+			cities_requested.append(file)
+			new = path + file
+			graph = dbc.Col([
+						dcc.Link(str(file), href='/' + str(file)),
+						dbc.Row([
+						dbc.Col( dcc.Graph(id='test', figure = build_pre_graphs(str(file)),
+										   style={'backgroundColor' : colors['background'],'height':height})),
+					],no_gutters=True)
+					])
+			children.append(graph)
+	return children, cities_requested
+	
 
 url_bar_and_content_div = html.Div([
-    dcc.Location(id='url', refresh=False),
-    html.Div(id='page-content')
+	dcc.Location(id='url', refresh=False),
+	html.Div(id='page-content')
 ])
-
+children, cities_requested = generate_html()
 layout_index = html.Div(style = {'backgroundColor' : colors['background']},
+	children = children)
+'''layout_index = html.Div(style = {'backgroundColor' : colors['background']},
 	children = [
 		dbc.Row([
 		html.Div([
@@ -506,28 +518,27 @@ layout_index = html.Div(style = {'backgroundColor' : colors['background']},
 							   style={'backgroundColor' : colors['background'],'height':'45vh'})),
 		],no_gutters=True)
 	])
-])
+])'''
 
 app.layout = url_bar_and_content_div
 app.title = 'COvid-19'
 
 
 app.validation_layout = html.Div([
-    url_bar_and_content_div,
-    layout_index,
-    layout(False, None)
+	url_bar_and_content_div,
+	layout_index,
+	layout(False, None)
 ])
 
 @app.callback(Output('page-content', 'children'),
-              [Input('url', 'pathname')])
+			  [Input('url', 'pathname')])
 
 def display_page(pathname):
-	print('URL changed', pathname)
-
-	if pathname == '/Boulder' or pathname == '/Chile':
+	print('URL changed', pathname[1:])
+	if pathname[1:] in cities_requested:
 		return layout(True, pathname)
 	else:
-	    return layout_index
+		return layout_index
 
 
 

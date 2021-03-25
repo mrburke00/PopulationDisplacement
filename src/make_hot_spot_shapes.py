@@ -67,6 +67,10 @@ parser.add_option("--max_lon",
 	dest="max_lon",
 	help="max_lon")
 
+parser.add_option("--county_shapes_name",
+	dest="county_shapes_name",
+	help="county_shapes_name")
+
 (options, args) = parser.parse_args()
 if not options.db:
 		parser.error('DB file not given')
@@ -292,7 +296,7 @@ D = get_db_fields(options.db, ['n_baseline', 'n_crisis'])
 
 gdf = gpd.read_file(options.shapefile)
 
-with open(options.base_path+'/dash/location_data/dates_times.pickle', 'rb') as handle:
+with open(options.base_path+'dash/saved_data/'+options.sit_rep_name+'/dates_times.pickle', 'rb') as handle:
 	dates_times = pickle.load(handle)
 
 clean_files()
@@ -403,7 +407,7 @@ for pos in D:
 			crisis = df['crisis'].to_numpy()
 			crisis_avg = []
 
-			shape = get_bounding_shape(lat, lon, gdf, "NAME") #pass from config file 
+			shape = get_bounding_shape(lat, lon, gdf, options.county_shapes_name) #pass from config file 
 
 			if shape is not None:
 				o.append([shape,lat,lon])
@@ -584,7 +588,7 @@ for j in range(0,len(dates_times)):
 	df['ids'] = ids
 	df_dict[today+'_'+time] = df
 
-with open(options.base_path+'dash/location_data/json_geo.json', 'w') as outfile:
+with open(options.base_path+'dash/saved_data/'+ options.sit_rep_name+ '/json_geo.json', 'w') as outfile:
 	json.dump(save_jfile, outfile)
 
 df_dict_final = {}
@@ -607,7 +611,7 @@ for j in range(0,len(dates_times)):
 	df_new['z_score_'+today_index] = df['z_score']
 df_geo = df_new
 
-with open(options.base_path+'dash/location_data/animation.pickle', 'wb') as handle:
+with open(options.base_path+'dash/saved_data/'+ options.sit_rep_name+ '/animation.pickle', 'wb') as handle:
 	pickle.dump(df_geo, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 clean_files()

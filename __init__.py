@@ -12,47 +12,55 @@ def daterange(date1, date2):
 
 #clean all files before proceeding
 
-def clean_files():
-    sit_rep_name = 'Boulder'
-    base_path = "/Users/DBurke/Documents/Layerlab/generalized_pipeline" #CHANGE PATH
-    sit_rep_path = base_path+'/sitreps/'+sit_rep_name+'/'+'Boulder_hot_spot_shapes' +'/'
-    location_data_path = base_path + "/dash/location_data/"
+def clean_files(sit_rep_name):
 
-    if os.path.isfile(location_data_path + 'dates_times.pickle'):
-        os.remove(location_data_path + 'dates_times.pickle')
+	base_path = "/Users/DBurke/Documents/Layerlab/generalized_pipeline" #CHANGE PATH
+	sit_rep_path = base_path+'/sitreps/'+sit_rep_name+'/'+'Boulder_hot_spot_shapes' +'/'
+	location_data_path = base_path + "/dash/saved_data/"+sit_rep_name+'/'
 
-    if os.path.isfile(location_data_path + 'animation.pickle'):
-        os.remove(location_data_path + 'animation.pickle')
+	if os.path.isfile(location_data_path + 'dates_times.pickle'):
+		os.remove(location_data_path + 'dates_times.pickle')
 
-    if os.path.isfile(location_data_path + 'trend_lines.pickle'):
-        os.remove(location_data_path + 'trend_lines.pickle')
+	if os.path.isfile(location_data_path + 'animation.pickle'):
+		os.remove(location_data_path + 'animation.pickle')
 
-    if os.path.isfile(location_data_path+'json_geo.json'):
-        os.remove(location_data_path+'json_geo.json')
+	if os.path.isfile(location_data_path + 'trend_lines.pickle'):
+		os.remove(location_data_path + 'trend_lines.pickle')
+
+	if os.path.isfile(location_data_path+'json_geo.json'):
+		os.remove(location_data_path+'json_geo.json')
+
+	if os.path.isfile(location_data_path+'pre_graph_data.csv'):
+		os.remove(location_data_path+'pre_graph_data.csv')
 
 ###end file cleaning
 
 
 def main():
-	clean_files()
+
 
 	cities_requested = []
 	with open("init.json") as f:
 		init_data = json.load(f)
 
-	cities_requested = init_data['cities'].replace(',',' ').split()
-	start_dt = init_data['start_date']
-	end_dt = init_data['end_date']
+
+
+	#cities_requested = init_data['cities'].replace(',',' ').split()
+
+
 
 	path = init_data['path']
 
-	dates =[]
 
 	config_file = open("snake_config.json",)
 	config = json.load(config_file)
 
-	for city in cities_requested:
+	for i in range(len(init_data['cities'])):
 
+		city = init_data['cities'][i]['city']
+		clean_files(city)
+		start_dt = init_data['cities'][i]['start_date']
+		end_dt = init_data['cities'][i]['end_date']
 
 		sit_rep_name = config[city]['sit_rep_name']
 		county_name = config[city]['county_name']
@@ -95,7 +103,7 @@ def main():
 "start_date" : "2020,5,25",
 "end_date" : "2020,6,25",
 "path" : "/Users/DBurke/Documents/Layerlab/generalized_pipeline/"
-}
+}1
 '''
 if __name__ == '__main__':
     main()
