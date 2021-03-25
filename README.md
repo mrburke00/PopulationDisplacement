@@ -4,6 +4,7 @@ Providing insight into population displacement during natural disasters
 
 ## Table of contents
    * [Setup](#setup)
+      * [Pipeline](#Establish-pipeline-configuration)
    * [Previous Builds](#previous-builds)
    * [Methods](#methods)
       * [Weekend Score](#weekend-score-)
@@ -71,7 +72,7 @@ $ python scrape.py --config config.json --cred --credential.json
   - If you would like to research the entire dataset then input `NONE` into all four categories. 
   - Finally input the population tiles into `Repo`. 
 
-### Establish pipeline configuration
+## Establish pipeline configuration
  - Edit `init.json`
  - This config file will establish the targets of interest you would like to investigate concurenntly. 
  - You may add as many as targets as you wish (Note: Only four concurrent cities have been tested at this point). Be mindful of the collective data useage your targets will demand. 
@@ -83,7 +84,7 @@ $ python scrape.py --config config.json --cred --credential.json
 
 Setup is now complete! 
 
-## Pipeline Step 1: Build Data
+### Pipeline Step 1: Build Data
 - Ensure the conda environment is activated
 - Run
 ```
@@ -92,7 +93,7 @@ $ python __init__.py
 - If successful you will have a directory for each of you defined targets in `/dash/saved_data/`
   - In each of these new directories you will have five files
         - `animation.pickle`, `dates_times.pickle`, `json_geo.json`, `pre_graph_data.csv`, and `trend_lines.pickle`
-## Pipeline Step 2: Run Dashboard
+### Pipeline Step 2: Run Dashboard
 - From `/dash` Run
 ```
 $ python local_dash.py
@@ -107,7 +108,7 @@ $ python local_dash.py
   - The line plots are the trend component of the season decompositon
   - Each line is attached to a tile. You can use the plotly selection tools to isolate tiles and lines of further interest
 
-### Previous Builds 
+## Previous Builds 
 ```
 $ python src/csv_to_sql.py --csv pop_tiles/ --db colorado.db
 rm -f colorado.db;sqlite3 colorado.db < tmp.sql
