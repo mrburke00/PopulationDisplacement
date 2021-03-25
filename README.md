@@ -4,6 +4,7 @@ Providing insight into population displacement during natural disasters
 
 ## Table of contents
    * [Setup](#setup)
+   * [Previous Build](#previous-build)
    * [Methods](#methods)
       * [Weekend Score](#weekend-score-)
       * [Slip Score](#slip-score-ss-)
