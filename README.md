@@ -1,6 +1,6 @@
 <img src="imgs/covid19.png" height="100">
 
-Providing social distancing situational awareness during the COVID-19 pandemic in Colorado
+Providing insight into population displacement during natural disasters 
 
 ## Table of contents
    * [Setup](#setup)
@@ -18,7 +18,24 @@ Providing social distancing situational awareness during the COVID-19 pandemic i
 $ conda env create -f environment.yml
 $ conda activate COvid19
 ```
-- Download Facebook Population (Tile Level) files to `pop_tiles/orig`
+- Set up automatic downloader
+- Download latest Google Chrome driver to `automate_download/`
+- Edit `automate_download/credential.json`, using your facebook email and password
+
+### Identify target of interest
+- Find target of interest on Facebook GeoInsights Portal
+- Click Facebook Population (Tile Level) and then `Download`. Save the url of this `Download` page. 
+- Edit `automate_download/config.json`
+    - Ensure correctness of `downloads` and 
+    - Enter url of facebook webpage for Tile Level downloads into `tile_link`
+    - Edit `repo` to the correct path
+    ```
+    /pop_tiles/{target_name}_pop_tiles/orig/"
+    ```    
+- Run 
+```
+$ python scrape.py --config config.json --cred --credential.json
+``` 
 - From `pop_tiles` run 
 ```
 $ bash fix_files.sh
