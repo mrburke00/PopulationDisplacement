@@ -49,19 +49,19 @@ $ python scrape.py --config config.json --cred --credential.json
     - Download the `county_shapes`
           - The pipeline requires shape file data of the region of interest.
           - The easiest way to obtain this data is to google `{region} + shape file`. (Example: 'Lebanon shape file') 
-              - Yields : https://data.humdata.org/dataset/lebanon-administrative-boundaries-levels-0-3
-              - In this example we can see the shape file data for administrative boundaries level 0, 1 ,2 and 3 for Lebanon
-              - Upon downloading this we see that it includes many files, we want level 0 in the following file formats
-                  - `.shx, .shp.xml, .shp, .sbx, .sbn, .prj, .dbf, .cpg`
+            - Yields : https://data.humdata.org/dataset/lebanon-administrative-boundaries-levels-0-3
+            - In this example we can see the shape file data for administrative boundaries level 0, 1 ,2 and 3 for Lebanon
+            - Upon downloading this we see that it includes many files, we want level 0 in the following file formats
+              - `.shx, .shp.xml, .shp, .sbx, .sbn, .prj, .dbf, .cpg`
               - Select these files for level 0 and move them into a new directory in `facebook/shapefiles/...` 
               - Open a new terminal and `cd facebook/shapefiles/`
               - Run
-                  ```
-                  $ python 
-                  >>> import geopandas as gpd
-                  >>> gdf = gpd.read_file("{shape_directory}")
-                  >>> gdf
-                  ```
+
+                              $ python 
+                              >>> import geopandas as gpd
+                              >>> gdf = gpd.read_file("{shape_directory}")
+                              >>> gdf
+                  
               - This should output a table containing a `geometry` column and another column that will contain either cities, districts, villages, counties, states, etc. 
               - This column name will be your `county_shapes_name`. 
     -`city_shapes` is always `_` (later functionality)
